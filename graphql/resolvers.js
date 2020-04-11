@@ -87,7 +87,7 @@ module.exports = {
     },
     questions: async () => {
         try {
-            const questions = await Question.find()
+            const questions = await Question.find().sort({ createdAt: -1 })
             const fr = formatResult(questions)
             return fr.map(f => (
                 {
@@ -113,7 +113,7 @@ module.exports = {
     },
     answers: async () => {
         try {
-            const answers = await Answer.find()
+            const answers = await Answer.find().sort({ createdAt: -1 })
             const fr = formatResult(answers)
             return fr.map(f => (
                 {
