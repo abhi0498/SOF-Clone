@@ -49,6 +49,8 @@ input AnswerData{
 type RootQuery{
     users:[User!]
     questions:[Question!]
+    question(id:ID!):Question!
+
     answers: [Answer]
     login(UserData:UserData): AuthData!
 }

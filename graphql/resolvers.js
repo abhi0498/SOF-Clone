@@ -99,6 +99,18 @@ module.exports = {
             throw error
         }
     },
+    question: async (args) => {
+        try {
+            const question = await Question.findById(args.id)
+
+            return {
+                ...question._doc, creator: getUser.bind(this, question._doc.creator), answers: getAnswersByQuestion.bind(this, question._doc._id), createdAt: dateToString.bind(this, question._doc.createdAt),
+                updatedAt: dateToString.bind(this, question._doc.updatedAt)
+            }
+        } catch (error) {
+            throw error
+        }
+    },
     answers: async () => {
         try {
             const answers = await Answer.find()
@@ -171,7 +183,6 @@ module.exports = {
             })
 
             const added = await newQuestion.save()
-            console.log(added)
             return "Added"
         } catch (error) {
             throw error
@@ -191,7 +202,6 @@ module.exports = {
             })
 
             const added = await newAnswer.save()
-            console.log(added)
             return "Added"
         } catch (error) {
             throw error
